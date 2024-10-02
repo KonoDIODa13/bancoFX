@@ -1,30 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Text layoutX="334.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDO" textAlignment="CENTER" wrappingWidth="104.2734375" />
-      <Pane layoutY="66.0" prefHeight="591.0" prefWidth="306.0" style="-fx-border-width: 1; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="467.0" AnchorPane.topAnchor="66.0">
-         <children>
-            <Button layoutX="81.0" layoutY="508.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="145.0" text="Ingresar Cuenta" />
-            <Text layoutX="101.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresar Cuenta" textAlignment="CENTER" wrappingWidth="104.2734375" />
-            <Text layoutX="30.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" wrappingWidth="50.13671875" />
-            <TextField id="nombreTitular" layoutX="101.0" layoutY="62.0" />
-            <Text layoutX="27.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos: " wrappingWidth="56.13671875" />
-            <TextField id="ApellidosTitular" layoutX="101.0" layoutY="101.0" />
-            <Text layoutX="30.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:" wrappingWidth="26.13671875" />
-            <TextField id="DNITitular" layoutX="101.0" layoutY="146.0" />
-            <Text layoutX="27.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN:" wrappingWidth="32.13671875" />
-            <TextField id="IBANCuenta" layoutX="101.0" layoutY="186.0" />
-            <Text layoutX="24.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo:" wrappingWidth="38.13671875" />
-            <TextField id="saldoCuenta" layoutX="101.0" layoutY="232.0" />
-         </children>
-      </Pane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0"
+            prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.controller.controller">
+    <children>
+        <Text layoutX="334.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDO"
+              textAlignment="CENTER" wrappingWidth="104.2734375"/>
+        <Pane layoutY="66.0" prefHeight="591.0" prefWidth="306.0" style="-fx-border-width: 1; -fx-border-color: black;"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="467.0"
+              AnchorPane.topAnchor="66.0">
+            <children>
+                <Button layoutX="81.0" layoutY="508.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="145.0"
+                        text="Ingresar Cuenta"/>
+                <Text layoutX="101.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresar Cuenta"
+                      textAlignment="CENTER" wrappingWidth="104.2734375"/>
+                <Text layoutX="30.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:"
+                      wrappingWidth="50.13671875"/>
+                <TextField id="nombreTitular" fx:id="TFNombre" layoutX="101.0" layoutY="62.0"/>
+                <Text layoutX="27.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos: "
+                      wrappingWidth="56.13671875"/>
+                <TextField id="ApellidosTitular" fx:id="TFApellidos" layoutX="101.0" layoutY="101.0"/>
+                <Text layoutX="30.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:"
+                      wrappingWidth="26.13671875"/>
+                <TextField id="DNITitular" fx:id="TFDNI" layoutX="101.0" layoutY="138.0"/>
+                <Text layoutX="27.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN:"
+                      wrappingWidth="32.13671875"/>
+                <TextField id="IBANCuenta" fx:id="TFIBAN" layoutX="101.0" layoutY="173.0"/>
+                <Text layoutX="24.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo:"
+                      wrappingWidth="38.13671875"/>
+                <TextField id="saldoCuenta" fx:id="TFSaldo" layoutX="101.0" layoutY="211.0"/>
+                <Accordion layoutX="27.0" layoutY="296.0"/>
+                <Separator layoutX="43.0" layoutY="249.0" prefHeight="3.0" prefWidth="200.0"/>
+                <Accordion layoutX="101.0" layoutY="283.0"/>
+                <RadioButton fx:id="RBAhorro" layoutX="27.0" layoutY="287.0" mnemonicParsing="false"
+                             onAction="#mostrarCuentaAhorro" text="Ahorro">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="tipoCuentaTG"/>
+                    </toggleGroup>
+                </RadioButton>
+                <Text layoutX="101.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de Cuenta:"
+                      wrappingWidth="104.2734375"/>
+                <RadioButton fx:id="RBPersonal" layoutX="110.0" layoutY="287.0" mnemonicParsing="false"
+                             onAction="#mostrarCuentaPersonal" text="Personal" toggleGroup="$tipoCuentaTG"/>
+                <RadioButton fx:id="RBEmpresa" layoutX="206.0" layoutY="287.0" mnemonicParsing="false"
+                             onAction="#mostrarCuentaEmpresa" text="Empresa" toggleGroup="$tipoCuentaTG"/>
+                <Text disable="true" layoutX="33.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Interés:" wrappingWidth="50.13671875"/>
+                <TextField id="nombreTitular" fx:id="TFInteres" disable="true" layoutX="104.0" layoutY="321.0"/>
+                <Text disable="true" layoutX="14.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Manteniminento:" wrappingWidth="95.13671875"/>
+                <TextField id="nombreTitular" fx:id="TFMantenimiento" disable="true" layoutX="113.0" layoutY="356.0"/>
+                <Text disable="true" layoutX="22.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Descubierto:" wrappingWidth="79.13671875"/>
+                <TextField id="TFInteresDescubierto" fx:id="TFInteresDescubierto" disable="true" layoutX="113.0"
+                           layoutY="391.0"/>
+                <Text disable="true" layoutX="10.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Max Descubierto:" wrappingWidth="104.2734375"/>
+                <TextField id="nombreTitular" fx:id="TFInteres3" disable="true" layoutX="113.0" layoutY="426.0"/>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>
