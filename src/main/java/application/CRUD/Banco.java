@@ -25,8 +25,9 @@ public class Banco {
     }
 
     public CuentaBancaria informacionCuenta(String IBAN) {
+        System.out.println(cuentas.size());
         return cuentas.stream()
-                .filter(cuentaBancaria -> cuentaBancaria.getIBAN().equals(IBAN))
+                .filter(cuentaBancaria -> cuentaBancaria.getIBAN().equalsIgnoreCase(IBAN))
                 .findFirst()
                 .orElse(null);
     }

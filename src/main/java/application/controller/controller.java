@@ -24,7 +24,31 @@ public class controller {
     @FXML
     private RadioButton RBEmpresa;
     @FXML
-    TextField TFNombre, TFApellidos, TFDNI, TFIBAN, TFSaldo, TFInteres, TFMantenimiento, TFInteresDescubierto, TFMaxDescubierto;
+    TextField TFNombre, TFApellidos, TFDNI, TFIBAN, TFSaldo,
+            TFInteres, TFMantenimiento, TFInteresDescubierto, TFMaxDescubierto,
+            TFIBANBusqueda;
+
+    int tipoCuenta = 0;
+
+    public void mostrarCuentaAhorro(ActionEvent event) {
+        TInteres.setVisible(true);
+        TFInteres.setDisable(false);
+        TFInteres.setVisible(true);
+
+        TMantenimiento.setVisible(false);
+        TFMantenimiento.setDisable(true);
+        TFMantenimiento.setVisible(false);
+
+        TInteresDescubierto.setVisible(false);
+        TFInteresDescubierto.setDisable(true);
+        TFInteresDescubierto.setVisible(false);
+
+        TMaxDescubierto.setVisible(false);
+        TFMaxDescubierto.setDisable(true);
+        TFMaxDescubierto.setVisible(false);
+
+        tipoCuenta = 1;
+    }
 
     public void mostrarCuentaPersonal(ActionEvent event) {
         TInteres.setVisible(false);
@@ -42,6 +66,8 @@ public class controller {
         TMaxDescubierto.setVisible(false);
         TFMaxDescubierto.setDisable(true);
         TFMaxDescubierto.setVisible(false);
+
+        tipoCuenta = 2;
     }
 
 
@@ -61,37 +87,60 @@ public class controller {
         TMaxDescubierto.setVisible(true);
         TFMaxDescubierto.setDisable(false);
         TFMaxDescubierto.setVisible(true);
+
+        tipoCuenta = 3;
     }
 
-    public void mostrarCuentaAhorro(ActionEvent event) {
-        TInteres.setVisible(true);
-        TFInteres.setDisable(false);
-        TFInteres.setVisible(true);
-
-        TMantenimiento.setVisible(false);
-        TFMantenimiento.setDisable(true);
-        TFMantenimiento.setVisible(false);
-
-        TInteresDescubierto.setVisible(false);
-        TFInteresDescubierto.setDisable(true);
-        TFInteresDescubierto.setVisible(false);
-
-        TMaxDescubierto.setVisible(false);
-        TFMaxDescubierto.setDisable(true);
-        TFMaxDescubierto.setVisible(false);
-    }
 
     public void abrirCuenta(ActionEvent event) {
         String nombre = TFNombre.getText(), apellidos = TFApellidos.getText(), DNI = TFDNI.getText(), IBAN = TFIBAN.getText();
-        double saldo = Double.parseDouble(TFSaldo.getText()), interes = Double.parseDouble(TFInteres.getText());
+        double saldo = Double.parseDouble(TFSaldo.getText());
         Persona titular = new Persona(nombre, apellidos, DNI);
-        CuentaAhorro cuenta = new CuentaAhorro(titular, IBAN, saldo, interes);
-        if(banco.abrirCuenta(cuenta)){
+        boolean compruebaInsertado = false;
+        switch (tipoCuenta) {
+            case 1: //ahorro
+                double interes = Double.parseDouble(TFInteres.getText());
+                CuentaAhorro cuentaAhorro = new CuentaAhorro(titular, IBAN, saldo, interes);
+                if (banco.abrirCuenta(cuentaAhorro)) {
+                    compruebaInsertado = true;
+                }
+                break;
+            case 2: //personal
+                double mantenimiento = Double.parseDouble(TFMantenimiento.getText());
+                CuentaPersonal cuentaPersonal = new CuentaPersonal(titular, IBAN, saldo, mantenimiento);
+                if (banco.abrirCuenta(cuentaPersonal)) {
+                    compruebaInsertado = true;
+                }
+                break;
+            case 3:
+                double interesDescubierto = Double.parseDouble(TFInteresDescubierto.getText()), maxDescubierto = Double.parseDouble(TFMaxDescubierto.getText());
+
+                CuentaEmpresa cuentaEmpresa = new CuentaEmpresa(titular, IBAN, saldo, interesDescubierto, maxDescubierto);
+                if (banco.abrirCuenta(cuentaEmpresa)) {
+                    compruebaInsertado = true;
+                }
+                break;
+        }
+
+        if (compruebaInsertado) {
             Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, "Cuenta insertada con exito");
             alerta.show();
-        }else{
-            Alert alerta= new Alert(Alert.AlertType.ERROR, "Error al insertar cuenta");
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.ERROR, "Error al insertar cuenta");
             alerta.show();
         }
+    }
+
+    public void buscarCuenta(ActionEvent event) {
+        String IBANBusqueda = TFIBANBusqueda.getText();
+        CuentaBancaria cuentaBancaria = banco.informacionCuenta(IBANBusqueda);
+        if (cuentaBancaria != null) {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, "Cuenta encontrada\n" + cuentaBancaria);
+            alerta.show();
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.ERROR, "Cuenta no encontrada");
+            alerta.show();
+        }
+
     }
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="773.0" style="-fx-border-width: 1; -fx-border-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.controller">
     <children>
         <Text layoutX="334.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDO" textAlignment="CENTER" wrappingWidth="104.2734375" />
         <Pane layoutY="66.0" prefHeight="591.0" prefWidth="306.0" style="-fx-border-width: 1; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="467.0" AnchorPane.topAnchor="66.0">
@@ -39,14 +39,22 @@
                 <RadioButton fx:id="RBEmpresa" layoutX="206.0" layoutY="287.0" mnemonicParsing="false" onAction="#mostrarCuentaEmpresa" text="Empresa" toggleGroup="$tipoCuentaTG" />
                 <Text fx:id="TInteres" disable="true" layoutX="33.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interés:" visible="false" wrappingWidth="50.13671875" />
                 <TextField fx:id="TFInteres" disable="true" layoutX="104.0" layoutY="321.0" visible="false" />
-                <Text fx:id="TMantenimiento" disable="true" layoutX="33.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mantenimiento:" visible="false" wrappingWidth="95.13671875" />
-                <TextField fx:id="TFMantenimiento" disable="true" layoutX="104.0" layoutY="321.0" visible="false" />
+                <Text fx:id="TMantenimiento" disable="true" layoutX="33.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mantenimiento:" wrappingWidth="95.13671875" />
+                <TextField fx:id="TFMantenimiento" disable="true" layoutX="132.0" layoutY="321.0" />
                 <Text fx:id="TInteresDescubierto" layoutX="32.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descubierto:" visible="false" wrappingWidth="79.13671875" />
                 <TextField fx:id="TFInteresDescubierto" layoutX="131.0" layoutY="321.0" visible="false" />
                 <Text fx:id="TMaxDescubierto" layoutX="32.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max Descubierto:" visible="false" wrappingWidth="104.2734375" />
                 <TextField fx:id="TFMaxDescubierto" layoutX="132.0" layoutY="362.0" visible="false" />
-                <Button layoutX="81.0" layoutY="508.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="145.0" text="Ingresar Cuenta" onAction="#abrirCuenta" />
+                <Button layoutX="81.0" layoutY="508.0" mnemonicParsing="false" onAction="#abrirCuenta" prefHeight="69.0" prefWidth="145.0" text="Ingresar Cuenta" />
             </children>
         </Pane>
+      <Pane layoutX="508.0" layoutY="67.0" prefHeight="177.0" prefWidth="265.0" style="-fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <Text layoutX="72.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Información Cuenta" textAlignment="CENTER" wrappingWidth="120.2734375" />
+            <Text layoutX="31.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" wrappingWidth="50.13671875" />
+            <TextField id="IBANBusqueda" fx:id="TFIBANBusqueda" layoutX="102.0" layoutY="47.0" />
+            <Button layoutX="104.0" layoutY="89.0" mnemonicParsing="false" onAction="#buscarCuenta" prefHeight="69.0" prefWidth="145.0" text="Buscar Cuenta" />
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
