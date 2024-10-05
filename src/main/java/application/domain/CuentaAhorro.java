@@ -20,6 +20,9 @@ public class CuentaAhorro extends CuentaBancaria {
     public String toString() {
         return "CuentaAhorro{" +
                 "interes=" + interes +
+                ", titular=" + titular +
+                ", saldo=" + saldo +
+                ", IBAN='" + IBAN + '\'' +
                 '}';
     }
 }

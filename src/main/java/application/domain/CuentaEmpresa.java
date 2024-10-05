@@ -29,8 +29,10 @@ public class CuentaEmpresa extends CuentaCorriente{
     @Override
     public String toString() {
         return "CuentaEmpresa{" +
-                "interesDescubierto=" + interesDescubierto +
-                ", MaxDescubierto=" + MaxDescubierto +
+                "MaxDescubierto=" + MaxDescubierto +
+                ", titular=" + titular +
+                ", saldo=" + saldo +
+                ", IBAN='" + IBAN + '\'' +
                 '}';
     }
 }

@@ -4,6 +4,7 @@ module application.banco {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires java.desktop;
 
     opens application.banco to javafx.fxml;
     exports application.banco;

@@ -20,6 +20,9 @@ public class CuentaPersonal extends CuentaCorriente {
     public String toString() {
         return "CuentaPersonal{" +
                 "mantenimiento=" + mantenimiento +
+                ", titular=" + titular +
+                ", saldo=" + saldo +
+                ", IBAN='" + IBAN + '\'' +
                 '}';
     }
 }

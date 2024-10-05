@@ -1,15 +1,12 @@
 package application.domain;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public abstract class CuentaBancaria {
     Persona titular;
     Double saldo;
     String IBAN;
 
     public CuentaBancaria(Persona titular, String IBAN, Double saldo) {
-        if (!compruebaIban(IBAN)) return;
+        //if (!compruebaIban(IBAN)) return;
         this.titular = titular;
         this.IBAN = IBAN;
         this.saldo = saldo;
@@ -48,21 +45,5 @@ public abstract class CuentaBancaria {
         if (retirada > saldo) return false;
         saldo -= retirada;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "CuentaBancaria{" +
-                "titular=" + titular +
-                ", saldo=" + saldo +
-                ", IBAN='" + IBAN + '\'' +
-                '}';
-    }
-
-    private boolean compruebaIban(String IBAN) {
-        String patronIBAN = "^ES\\d{20}$";
-        Pattern patronCompilado = Pattern.compile(patronIBAN);
-        Matcher matcher = patronCompilado.matcher(IBAN);
-        return matcher.matches();
     }
 }

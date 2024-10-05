@@ -25,7 +25,6 @@ public class Banco {
     }
 
     public CuentaBancaria informacionCuenta(String IBAN) {
-        System.out.println(cuentas.size());
         return cuentas.stream()
                 .filter(cuentaBancaria -> cuentaBancaria.getIBAN().equalsIgnoreCase(IBAN))
                 .findFirst()
@@ -36,6 +35,12 @@ public class Banco {
         CuentaBancaria cuenta = informacionCuenta(IBAN);
         if (cuenta == null) return false;
         return cuenta.ingresar(ingreso);
+    }
+
+    public boolean retiradaCuenta(String IBAN, Double ingreso) {
+        CuentaBancaria cuenta = informacionCuenta(IBAN);
+        if (cuenta == null) return false;
+        return cuenta.retirar(ingreso);
     }
 
     public Double obtenerSaldo(String IBAN) {
