@@ -28,7 +28,30 @@ Descripción del sistema de carpetas/paquetes:
 
       Por último, el método salir que nos mostrará una pantallita sobre si queremos salir o no, si es que si, acabará el programa, si no, seguira tal cual está. Además, están los métodos de comprobaciones con diferentes comprobaciones.
 
+    --------------------------------------------------------------------------------------
+
   Application/CRUD:
     La carpeta donde estarán todos las clases que contendrán todas las acciones que el usuario de la aplicación pueda realizar, en mi caso, la clase Banco que tiene un ArrayList de CuentasBancarias al que añadiremos las cuentas que creemos.
 
     Tendrá el método de abrirCuenta con el que abriremos la cuenta, el de listadoCuentas utilizado para volcar el array de Cuentas al ListView (realizo un copy of para que sea inmutable y no me se pueda modificar), el de informacion de cuenta que buscará una la cuenta mediante su IBAN y los de ingreso , retirada y obtenerSaldo que ya he comentado.
+  
+    --------------------------------------------------------------------------------------
+  Application/Domain:
+    La carpeta donde estarán todas las clases que se van a utilizar en la aplicación. En mi caso, todas aquellas clases que van a definir los diferentes tipos de cuentas que se pueden crear.
+
+    La clase Persona guardará los datos del nombre, apellidos y DNI del usuario de la cuenta.
+    La clase CuentaBancara será abstracta y tendrá los atributos del titular (la Persona de la cuenta), el IBAN y el saldo de cuenta. de ella se extenderán el resto de clases.
+    La clase CuentaAhorro extenderá de CuentaBancaria y tendrá como atributo el de interés.
+    La clase CuentaCorriente será abstracta y extenderá de CuentaBancaria.
+    La clase CuentaPersonal que extenderá de CuentaCorriente y tendrá el atributo de mantenimiento.
+    La clase CuentaEmpresa que extenderá de CuentaCorriente y tendrá los atributos de interés descubierto y de máximo de descubierto.
+
+    ------------------------------------------------------------------------------------
+  Application/utils:
+    La carpeta en la que añadiré algunas clases que vea útiles para mi aplicación.
+
+      En mi caso, el de los Alerts que tiene ods metodos, mostrarError, que mostrará el error y la descripción del error y el de mostrarConfirmación que mostrará que está correcto.
+    ------------------------------------------------------------------------------------
+  Resources/Application/Banco
+    La carpeta de recursos en el que se guarda por defecto el archivo FXML para ver la interfaz de la aplicación
+  
