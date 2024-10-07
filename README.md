@@ -53,5 +53,5 @@ Descripción del sistema de carpetas/paquetes:
       En mi caso, el de los Alerts que tiene ods metodos, mostrarError, que mostrará el error y la descripción del error y el de mostrarConfirmación que mostrará que está correcto.
     ------------------------------------------------------------------------------------
   Resources/Application/Banco
-    La carpeta de recursos en el que se guarda por defecto el archivo FXML para ver la interfaz de la aplicación
+    La carpeta de recursos en el que se guarda por defecto el archivo FXML para ver la interfaz de la aplicación.
   
