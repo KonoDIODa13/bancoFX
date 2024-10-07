@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -10,53 +12,96 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="773.0" style="-fx-border-width: 1; -fx-border-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0"
+            prefWidth="781.0" style="-fx-border-width: 1; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.controller">
     <children>
-        <Text layoutX="334.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDO" textAlignment="CENTER" wrappingWidth="104.2734375" />
-        <Pane layoutY="66.0" prefHeight="591.0" prefWidth="306.0" style="-fx-border-width: 1; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="467.0" AnchorPane.topAnchor="66.0">
+        <Text layoutX="338.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDO"
+              textAlignment="CENTER" wrappingWidth="104.2734375"/>
+        <Pane layoutY="42.0" prefHeight="500.0" prefWidth="375.0" style="-fx-border-color: black;">
             <children>
-                <Text layoutX="101.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresar Cuenta" textAlignment="CENTER" wrappingWidth="104.2734375" />
-                <Text layoutX="30.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" wrappingWidth="50.13671875" />
-                <TextField id="nombreTitular" fx:id="TFNombre" layoutX="101.0" layoutY="62.0" />
-                <Text layoutX="27.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos: " wrappingWidth="56.13671875" />
-                <TextField id="ApellidosTitular" fx:id="TFApellidos" layoutX="101.0" layoutY="101.0" />
-                <Text layoutX="30.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:" wrappingWidth="26.13671875" />
-                <TextField id="DNITitular" fx:id="TFDNI" layoutX="101.0" layoutY="138.0" />
-                <Text layoutX="27.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN:" wrappingWidth="32.13671875" />
-                <TextField id="IBANCuenta" fx:id="TFIBAN" layoutX="101.0" layoutY="173.0" />
-                <Text layoutX="24.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo:" wrappingWidth="38.13671875" />
-                <TextField id="saldoCuenta" fx:id="TFSaldo" layoutX="101.0" layoutY="211.0" />
-                <Accordion layoutX="27.0" layoutY="296.0" />
-                <Separator layoutX="43.0" layoutY="249.0" prefHeight="3.0" prefWidth="200.0" />
-                <Accordion layoutX="101.0" layoutY="283.0" />
-                <RadioButton fx:id="RBAhorro" layoutX="27.0" layoutY="287.0" mnemonicParsing="false" onAction="#mostrarCuentaAhorro" text="Ahorro">
+                <Text layoutX="126.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresar Cuenta"
+                      textAlignment="CENTER" wrappingWidth="104.2734375"/>
+                <Text layoutX="64.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:"
+                      wrappingWidth="50.13671875"/>
+                <TextField id="nombreTitular" fx:id="TFNombre" layoutX="135.0" layoutY="31.0" prefHeight="25.0"
+                           prefWidth="200.0"/>
+                <Text layoutX="61.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos: "
+                      wrappingWidth="56.13671875"/>
+                <TextField id="ApellidosTitular" fx:id="TFApellidos" layoutX="135.0" layoutY="70.0" prefHeight="25.0"
+                           prefWidth="200.0"/>
+                <Text layoutX="64.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:"
+                      wrappingWidth="26.13671875"/>
+                <TextField id="DNITitular" fx:id="TFDNI" layoutX="135.0" layoutY="107.0" prefHeight="25.0"
+                           prefWidth="200.0"/>
+                <Text layoutX="61.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN:"
+                      wrappingWidth="32.13671875"/>
+                <TextField id="IBANCuenta" fx:id="TFIBAN" layoutX="135.0" layoutY="142.0" prefHeight="25.0"
+                           prefWidth="200.0"/>
+                <Text layoutX="58.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo:"
+                      wrappingWidth="38.13671875"/>
+                <TextField id="saldoCuenta" fx:id="TFSaldo" layoutX="135.0" layoutY="180.0" prefHeight="25.0"
+                           prefWidth="200.0"/>
+                <Accordion layoutX="27.0" layoutY="296.0"/>
+                <Accordion layoutX="101.0" layoutY="283.0"/>
+                <RadioButton layoutX="65.0" layoutY="266.0" mnemonicParsing="false" onAction="#mostrarCuentaAhorro"
+                             text="Ahorro">
                     <toggleGroup>
-                        <ToggleGroup fx:id="tipoCuentaTG" />
+                        <ToggleGroup fx:id="tipoCuentaTG"/>
                     </toggleGroup>
                 </RadioButton>
-                <Text layoutX="101.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de Cuenta:" wrappingWidth="104.2734375" />
-                <RadioButton fx:id="RBPersonal" layoutX="110.0" layoutY="287.0" mnemonicParsing="false" onAction="#mostrarCuentaPersonal" text="Personal" toggleGroup="$tipoCuentaTG" />
-                <RadioButton fx:id="RBEmpresa" layoutX="206.0" layoutY="287.0" mnemonicParsing="false" onAction="#mostrarCuentaEmpresa" text="Empresa" toggleGroup="$tipoCuentaTG" />
-                <Text fx:id="TInteres" disable="true" layoutX="33.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interés:" visible="false" wrappingWidth="50.13671875" />
-                <TextField fx:id="TFInteres" disable="true" layoutX="104.0" layoutY="321.0" visible="false" />
-                <Text fx:id="TMantenimiento" layoutX="33.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mantenimiento:" visible="false" wrappingWidth="95.13671875" />
-                <TextField fx:id="TFMantenimiento" layoutX="132.0" layoutY="321.0" visible="false" />
-                <Text fx:id="TInteresDescubierto" layoutX="32.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descubierto:" visible="false" wrappingWidth="79.13671875" />
-                <TextField fx:id="TFInteresDescubierto" layoutX="131.0" layoutY="321.0" visible="false" />
-                <Text fx:id="TMaxDescubierto" layoutX="32.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max Descubierto:" visible="false" wrappingWidth="104.2734375" />
-                <TextField fx:id="TFMaxDescubierto" layoutX="132.0" layoutY="362.0" visible="false" />
-                <Button layoutX="20.0" layoutY="507.0" mnemonicParsing="false" onAction="#abrirCuenta" prefHeight="36.0" prefWidth="104.0" text="Ingresar Cuenta" />
-            <Button layoutX="146.0" layoutY="507.0" mnemonicParsing="false" onAction="#limpiarCampos" prefHeight="36.0" prefWidth="120.0" text="Limpiar campos" />
+                <Text layoutX="139.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de Cuenta:"
+                      wrappingWidth="104.2734375"/>
+                <RadioButton layoutX="148.0" layoutY="266.0" mnemonicParsing="false" onAction="#mostrarCuentaPersonal"
+                             text="Personal" toggleGroup="$tipoCuentaTG"/>
+                <RadioButton layoutX="244.0" layoutY="266.0" mnemonicParsing="false" onAction="#mostrarCuentaEmpresa"
+                             text="Empresa" toggleGroup="$tipoCuentaTG"/>
+                <Text fx:id="TInteres" layoutX="33.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Interés:" visible="false" wrappingWidth="50.13671875"/>
+                <TextField fx:id="TFInteres" layoutX="104.0" layoutY="305.0" visible="false"/>
+                <Text fx:id="TMantenimiento" layoutX="33.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Mantenimiento:" visible="false" wrappingWidth="95.13671875"/>
+                <TextField fx:id="TFMantenimiento" layoutX="132.0" layoutY="305.0" visible="false"/>
+                <Text fx:id="TInteresDescubierto" layoutX="32.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Descubierto:" visible="false" wrappingWidth="79.13671875"/>
+                <TextField fx:id="TFInteresDescubierto" layoutX="131.0" layoutY="305.0" visible="false"/>
+                <Text fx:id="TMaxDescubierto" layoutX="32.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Max Descubierto:" visible="false" wrappingWidth="104.2734375"/>
+                <TextField fx:id="TFMaxDescubierto" layoutX="132.0" layoutY="346.0" visible="false"/>
+                <Button layoutX="52.0" layoutY="422.0" mnemonicParsing="false" onAction="#abrirCuenta" prefHeight="36.0"
+                        prefWidth="104.0" text="Ingresar Cuenta"/>
+                <Button layoutX="217.0" layoutY="422.0" mnemonicParsing="false" onAction="#limpiarCampos"
+                        prefHeight="36.0" prefWidth="120.0" text="Limpiar campos"/>
+                <Separator layoutY="219.0" prefWidth="375.0"/>
             </children>
         </Pane>
-      <Pane layoutX="469.0" layoutY="67.0" prefHeight="128.0" prefWidth="304.0" style="-fx-border-width: 1; -fx-border-color: black;">
-         <children>
-            <Text layoutX="92.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Información Cuenta" textAlignment="CENTER" wrappingWidth="120.2734375" />
-            <Text layoutX="36.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN a buscar:" wrappingWidth="79.13671875" />
-            <TextField id="IBANBusqueda" fx:id="TFIBANBusqueda" layoutX="125.0" layoutY="47.0" />
-            <Button layoutX="100.0" layoutY="89.0" mnemonicParsing="false" onAction="#buscarCuenta" prefHeight="25.0" prefWidth="104.0" text="Buscar Cuenta" />
-         </children>
-      </Pane>
-      <Button layoutX="659.0" layoutY="613.0" mnemonicParsing="false" onAction="#salir" prefHeight="25.0" prefWidth="89.0" text="Salir" />
+        <Pane layoutX="406.0" layoutY="42.0" prefHeight="238.0" prefWidth="375.0" style="-fx-border-color: black;">
+            <children>
+                <Text layoutX="127.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opciones Cuenta"
+                      textAlignment="CENTER" wrappingWidth="120.2734375"/>
+                <Text layoutX="32.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN a buscar:"
+                      wrappingWidth="79.13671875"/>
+                <TextField id="IBANBusqueda" fx:id="TFIBANBusqueda" layoutX="152.0" layoutY="47.0" prefHeight="25.0"
+                           prefWidth="188.0"/>
+                <Button layoutX="135.0" layoutY="88.0" mnemonicParsing="false" onAction="#buscarCuenta"
+                        prefHeight="25.0" prefWidth="104.0" text="Buscar Cuenta"/>
+                <Text fx:id="TCantidad" disable="true" layoutX="33.0" layoutY="143.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="Cantidad:" wrappingWidth="79.13671875"/>
+                <TextField fx:id="TFCantidad" disable="true" layoutX="153.0" layoutY="126.0" prefHeight="25.0"
+                           prefWidth="188.0"/>
+                <Button fx:id="BTNObtenerSaldo" disable="true" layoutX="239.0" layoutY="160.0" mnemonicParsing="false"
+                        onAction="#obtenerSaldo" prefHeight="25.0" prefWidth="104.0" text="Obtener Saldo"/>
+                <Button fx:id="BTNRetirar" disable="true" layoutX="83.0" layoutY="199.0" mnemonicParsing="false"
+                        onAction="#retirar" prefHeight="25.0" prefWidth="104.0" text="Retirar"/>
+                <Button fx:id="BTNIngresar" disable="true" layoutX="83.0" layoutY="160.0" mnemonicParsing="false"
+                        onAction="#ingresar" prefHeight="25.0" prefWidth="104.0" text="Ingresar"/>
+                <Button layoutX="239.0" layoutY="199.0" mnemonicParsing="false" onAction="#limpiarCamposOpciones"
+                        prefHeight="25.0" prefWidth="104.0" text="Limpiar campos"/>
+            </children>
+        </Pane>
+        <Label layoutX="552.0" layoutY="292.0" prefHeight="25.0" prefWidth="104.0" text="Listado de cuentas"/>
+        <ListView fx:id="LVCuentas" layoutX="405.0" layoutY="328.0" prefHeight="189.0" prefWidth="369.0"/>
+        <Button layoutX="656.0" layoutY="542.0" mnemonicParsing="false" onAction="#salir" prefHeight="25.0"
+                prefWidth="104.0" text="Salir"/>
     </children>
 </AnchorPane>

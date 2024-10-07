@@ -5,7 +5,7 @@ public class Persona {
     String apellidos;
     String DNI;
 
-    public Persona(String DNI, String apellidos, String nombre) {
+    public Persona(String nombre, String apellidos, String DNI) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.DNI = DNI;

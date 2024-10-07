@@ -34,12 +34,14 @@ public class Banco {
     public boolean ingresoCuenta(String IBAN, Double ingreso) {
         CuentaBancaria cuenta = informacionCuenta(IBAN);
         if (cuenta == null) return false;
+        if (ingreso == 0) return false;
         return cuenta.ingresar(ingreso);
     }
 
     public boolean retiradaCuenta(String IBAN, Double ingreso) {
         CuentaBancaria cuenta = informacionCuenta(IBAN);
         if (cuenta == null) return false;
+        if (ingreso == 0) return false;
         return cuenta.retirar(ingreso);
     }
 

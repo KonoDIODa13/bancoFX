@@ -3,10 +3,12 @@ package application.controller;
 import application.CRUD.Banco;
 import application.domain.*;
 
+import application.utils.AlertUtils;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
@@ -18,19 +20,19 @@ import java.util.regex.Pattern;
 public class controller {
     Banco banco = new Banco();
 
-    public Text TInteres, TMantenimiento, TInteresDescubierto, TMaxDescubierto;
+    public Text TInteres, TMantenimiento, TInteresDescubierto, TMaxDescubierto, TCantidad;
     @FXML
     private ToggleGroup tipoCuentaTG;
     @FXML
-    private RadioButton RBAhorro;
-    @FXML
-    private RadioButton RBPersonal;
-    @FXML
-    private RadioButton RBEmpresa;
-    @FXML
     TextField TFNombre, TFApellidos, TFDNI, TFIBAN, TFSaldo,
             TFInteres, TFMantenimiento, TFInteresDescubierto, TFMaxDescubierto,
-            TFIBANBusqueda;
+            TFIBANBusqueda, TFCantidad;
+
+    @FXML
+    public Button BTNObtenerSaldo, BTNRetirar, BTNIngresar;
+
+    @FXML
+    public ListView LVCuentas;
 
     int tipoCuenta = 0;
 
@@ -100,26 +102,25 @@ public class controller {
         String nombre = TFNombre.getText();
         String apellidos = TFApellidos.getText();
         String DNI = TFDNI.getText();
+        comprobacionesTextos(nombre, apellidos, DNI);
         boolean boolIBAN = compruebaIBAN(TFIBAN.getText());
         if (boolIBAN) {
             String IBAN = TFIBAN.getText();
-            double saldo = Double.parseDouble(TFSaldo.getText());
+            double saldo = compruebaDecimal(TFSaldo.getText(), "saldo");
             Persona titular = new Persona(nombre, apellidos, DNI);
 
             boolean compruebaInsertado = annadriTipoCuenta(titular, IBAN, saldo);
 
             if (compruebaInsertado) {
-                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, "Cuenta insertada con exito");
-                alerta.show();
+                AlertUtils.mostrarConfirmacion("Cuenta insertada con exito");
+                LVCuentas.setItems(FXCollections.observableList(banco.listadoCuentas()));
+                limpiarCampos(event);
             } else {
-                Alert alerta = new Alert(Alert.AlertType.ERROR, "Error al insertar cuenta");
-                alerta.show();
+                AlertUtils.mostrarError("Error al insertar cuenta");
             }
 
         } else {
-            Alert alerta = new Alert(Alert.AlertType.ERROR, "IBAN no correcto, recuede que teiene que ser ESNNNNNNNNNNNNNNNNNNNN");
-            alerta.show();
-            limpiarCampos(event);
+            AlertUtils.mostrarError("IBAN no correcto, recuede que tiene que ser ESNNNNNNNNNNNNNNNNNNNN");
         }
     }
 
@@ -127,21 +128,22 @@ public class controller {
         boolean compruebaInsertado = false;
         switch (tipoCuenta) {
             case 1: //ahorro
-                double interes = Double.parseDouble(TFInteres.getText());
+                double interes = compruebaDecimal(TFInteres.getText(), "interés");
                 CuentaAhorro cuentaAhorro = new CuentaAhorro(titular, IBAN, saldo, interes);
                 if (banco.abrirCuenta(cuentaAhorro)) {
                     compruebaInsertado = true;
                 }
                 break;
             case 2: //personal
-                double mantenimiento = Double.parseDouble(TFMantenimiento.getText());
+                double mantenimiento = compruebaDecimal(TFMantenimiento.getText(), "mantenimiento");
                 CuentaPersonal cuentaPersonal = new CuentaPersonal(titular, IBAN, saldo, mantenimiento);
                 if (banco.abrirCuenta(cuentaPersonal)) {
                     compruebaInsertado = true;
                 }
                 break;
-            case 3:
-                double interesDescubierto = Double.parseDouble(TFInteresDescubierto.getText()), maxDescubierto = Double.parseDouble(TFMaxDescubierto.getText());
+            case 3: //empresa
+                double interesDescubierto = compruebaDecimal(TFInteresDescubierto.getText(), "interes decubierto");
+                double maxDescubierto = compruebaDecimal(TFMaxDescubierto.getText(), "max decubierto");
 
                 CuentaEmpresa cuentaEmpresa = new CuentaEmpresa(titular, IBAN, saldo, interesDescubierto, maxDescubierto);
                 if (banco.abrirCuenta(cuentaEmpresa)) {
@@ -154,14 +156,25 @@ public class controller {
 
     public void buscarCuenta(ActionEvent event) {
         String IBANBusqueda = TFIBANBusqueda.getText();
-        CuentaBancaria cuentaBancaria = banco.informacionCuenta(IBANBusqueda);
-        if (cuentaBancaria != null) {
-            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, "Cuenta encontrada");
-            alerta.show();
+        if (compruebaIBAN(IBANBusqueda)) {
+            CuentaBancaria cuentaBancaria = banco.informacionCuenta(IBANBusqueda);
+            if (cuentaBancaria != null) {
+                AlertUtils.mostrarConfirmacion("Cuenta encontrada");
+                mostrarmovimientos();
+            } else {
+                AlertUtils.mostrarError("Cuenta no encontrada");
+            }
         } else {
-            Alert alerta = new Alert(Alert.AlertType.ERROR, "Cuenta no encontrada");
-            alerta.show();
+            AlertUtils.mostrarError("IBAN no correcto, recuede que tiene que ser ESNNNNNNNNNNNNNNNNNNNN");
         }
+    }
+
+    public void mostrarmovimientos() {
+        TFCantidad.setDisable(false);
+        BTNIngresar.setDisable(false);
+        BTNRetirar.setDisable(false);
+        BTNObtenerSaldo.setDisable(false);
+        TCantidad.setDisable(false);
     }
 
     public void limpiarCampos(ActionEvent event) {
@@ -195,11 +208,67 @@ public class controller {
                 TFMaxDescubierto.setVisible(false);
                 TFMaxDescubierto.setText("");
                 break;
-            default:
-                System.out.println("usted no deberia de estar aqui");
         }
         tipoCuentaTG.selectToggle(null);
         tipoCuenta = 0;
+    }
+
+    public void limpiarCamposOpciones(ActionEvent event) {
+        TFIBANBusqueda.setText("");
+        TFCantidad.setText("");
+        TCantidad.setDisable(true);
+        BTNRetirar.setDisable(true);
+        BTNObtenerSaldo.setDisable(true);
+        BTNIngresar.setDisable(true);
+    }
+    public Boolean compruebaIBAN(String IBAN) {
+        String patronIBAN = "^ES\\d{20}$";
+        Pattern patronCompilado = Pattern.compile(patronIBAN);
+        Matcher matcher = patronCompilado.matcher(IBAN);
+        return matcher.matches();
+
+    }
+
+    public void ingresar(ActionEvent event) {
+        String IBAN = TFIBANBusqueda.getText();
+        double cantidad = compruebaDecimal(TFCantidad.getText(), "cantidad");
+        if (compruebaIBAN(IBAN)) {
+            if (banco.ingresoCuenta(IBAN, cantidad)) {
+                double saldo = banco.obtenerSaldo(IBAN);
+                AlertUtils.mostrarConfirmacion("El saldo ha sido modificado con exito. El nuevo saldo es: " + saldo);
+                TFCantidad.setText("");
+            } else {
+                AlertUtils.mostrarError("Error al ingresar dinero en la cuenta.");
+            }
+        } else {
+            AlertUtils.mostrarError("IBAN no correcto, recuede que tiene que ser ESNNNNNNNNNNNNNNNNNNNN");
+        }
+    }
+
+    public void retirar(ActionEvent event) {
+        String IBAN = TFIBANBusqueda.getText();
+        double cantidad = compruebaDecimal(TFCantidad.getText(), "cantidad");
+        if (compruebaIBAN(IBAN)) {
+            if (banco.retiradaCuenta(IBAN, cantidad)) {
+                double saldo = banco.obtenerSaldo(IBAN);
+                AlertUtils.mostrarConfirmacion("El saldo ha sido modificado con exito. El nuevo saldo es: " + saldo);
+                TFCantidad.setText("");
+            } else {
+                AlertUtils.mostrarError("Error al retirar dinero en la cuenta.");
+            }
+        } else {
+            AlertUtils.mostrarError("IBAN no correcto, recuede que tiene que ser ESNNNNNNNNNNNNNNNNNNNN");
+        }
+    }
+
+    public void obtenerSaldo(ActionEvent event) {
+        String IBAN = TFIBANBusqueda.getText();
+        if (compruebaIBAN(IBAN)) {
+            double saldo = banco.obtenerSaldo(IBAN);
+            AlertUtils.mostrarConfirmacion("El Saldo de la cuenta es de: " + saldo);
+        } else {
+            AlertUtils.mostrarError("IBAN no correcto, recuede que tiene que ser ESNNNNNNNNNNNNNNNNNNNN");
+        }
     }
 
     public void salir(ActionEvent event) {
@@ -210,11 +279,28 @@ public class controller {
         }
     }
 
-    public Boolean compruebaIBAN(String IBAN) {
-        String patronIBAN = "^ES\\d{20}$";
-        Pattern patronCompilado = Pattern.compile(patronIBAN);
-        Matcher matcher = patronCompilado.matcher(IBAN);
-        return matcher.matches();
-
+    public double compruebaDecimal(String decimal, String tipo) {
+        if (decimal.isEmpty()) {
+            AlertUtils.mostrarError("No has rellenado nada en el campo " + tipo);
+            return 0;
+        }
+        if (!decimal.matches("\\d+")) {
+            AlertUtils.mostrarError("El campo de " + tipo + " no son solo números");
+            return 0;
+        }
+        return Double.parseDouble(decimal);
     }
+
+    public void compruebaTextos(String texto, String tipo) {
+        if (texto.isEmpty()) {
+            AlertUtils.mostrarError("No has rellenado nada en el campo " + tipo);
+        }
+    }
+
+    public void comprobacionesTextos(String nombre, String apellidos, String DNI) {
+        compruebaTextos(nombre, "nombre");
+        compruebaTextos(apellidos, "apellidos");
+        compruebaTextos(DNI, "DNI");
+    }
+
 }
