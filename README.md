@@ -2,7 +2,7 @@
 
 Para iniciarla, hay que dirigirse al main que esta en la ruta: "src/mainjava/application/banco/Main.java".
 
-Descripción del sistema de carpetas/paquetes:
+Descripción del sistema de carpetas/paquetes:\n
   Application/banco:
     La carpeta que crea al crear un nuevo proyecto. En ella, esta el main de la aplicación.
   Application/controller:
