@@ -1,6 +1,22 @@
 1ª PRÁCTICA: REPASO PROGRAMACIÓN: Cuentas Bancarias
 
 Para iniciarla, hay que dirigirse al main que esta en la ruta: "src/mainjava/application/banco/Main.java".
+
+Documentacion de la aplicación:
+
+  Cuando se ejecute el programa, se verá una pantalla con varios camposy paneles. Empezando de izquerda a derecha, tenemos el panel de insertar cuenta con los campos necesarios para insertar (nombre, apellidos DNI, IBAN, saldo). si pulsamos a los radio buttons de los tipo cuenta, segun el tipo podremos insertar una cuenta ahorro, una cuenta personal o una cuenta empresarial. por ultimo, pulsariamos al boton de insertar cuentapara insertarla. tambien podemos limpiar los campos (si queremos).
+
+  el otro panel que sale, el de opciones de la cuenta nos pedirá un IBAN de cuenta existente para realizar las operaciones de ingresar dinero, retirar dinero y obtener el saldo de la cuenta. al igual que en el anterior, tendremos un boton de limpiar los campos.
+  Además, tendremos una lista donde estarán todas las cuentas creadas para comprobar el IBAN de las cuentas. por último, estará el boton de salir para finalizar la aplicación.
+
+
+
+
+
+
+
+
+
 ----------------------------------------------------------------------------------------------------------
 Descripción del sistema de carpetas/paquetes:
 
