@@ -1,13 +1,13 @@
 package application.domain;
-
-public class CuentaEmpresa extends CuentaCorriente{
+//Extiendo de CuentaCorriente
+public class CuentaEmpresa extends CuentaCorriente {
     Double interesDescubierto;
-    Double MaxDescubierto;
+    Double maxDescubierto;
 
     public CuentaEmpresa(Persona titular, String IBAN, Double saldo, Double interesDescubierto, Double maxDescubierto) {
         super(titular, IBAN, saldo);
         this.interesDescubierto = interesDescubierto;
-        MaxDescubierto = maxDescubierto;
+        this.maxDescubierto = maxDescubierto;
     }
 
     public Double getInteresDescubierto() {
@@ -15,7 +15,7 @@ public class CuentaEmpresa extends CuentaCorriente{
     }
 
     public Double getMaxDescubierto() {
-        return MaxDescubierto;
+        return maxDescubierto;
     }
 
     public void setInteresDescubierto(Double interesDescubierto) {
@@ -23,16 +23,12 @@ public class CuentaEmpresa extends CuentaCorriente{
     }
 
     public void setMaxDescubierto(Double maxDescubierto) {
-        MaxDescubierto = maxDescubierto;
+        this.maxDescubierto = maxDescubierto;
     }
 
     @Override
-    public String toString() {
-        return "CuentaEmpresa{" +
-                "MaxDescubierto=" + MaxDescubierto +
-                ", titular=" + titular +
-                ", saldo=" + saldo +
-                ", IBAN='" + IBAN + '\'' +
-                '}';
+    public String imprimir() {
+        return "titular[" + titular.imprimir() + "], saldo=" + saldo + ", IBAN= " + IBAN + ", interes decubierto=" + interesDescubierto + " y maximo decubierto=" + maxDescubierto;
+
     }
 }

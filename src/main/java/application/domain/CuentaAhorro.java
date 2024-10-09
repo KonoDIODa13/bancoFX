@@ -1,5 +1,5 @@
 package application.domain;
-
+//Extiendo de CuentaBancaria
 public class CuentaAhorro extends CuentaBancaria {
     Double interes;
 
@@ -17,12 +17,7 @@ public class CuentaAhorro extends CuentaBancaria {
     }
 
     @Override
-    public String toString() {
-        return "CuentaAhorro{" +
-                "interes=" + interes +
-                ", titular=" + titular +
-                ", saldo=" + saldo +
-                ", IBAN='" + IBAN + '\'' +
-                '}';
+    public String imprimir() {
+        return "titular[" + titular.imprimir() + "], saldo=" + saldo + ", IBAN= " + IBAN + "e interes=" + interes;
     }
 }

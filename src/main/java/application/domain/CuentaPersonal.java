@@ -1,5 +1,5 @@
 package application.domain;
-
+//extiendo de CuentaCorriente
 public class CuentaPersonal extends CuentaCorriente {
     Double mantenimiento;
 
@@ -17,12 +17,8 @@ public class CuentaPersonal extends CuentaCorriente {
     }
 
     @Override
-    public String toString() {
-        return "CuentaPersonal{" +
-                "mantenimiento=" + mantenimiento +
-                ", titular=" + titular +
-                ", saldo=" + saldo +
-                ", IBAN='" + IBAN + '\'' +
-                '}';
+    public String imprimir() {
+        return "titular[" + titular.imprimir() + "], saldo=" + saldo + ", IBAN= " + IBAN + "y mantenimiento=" + mantenimiento;
+
     }
 }

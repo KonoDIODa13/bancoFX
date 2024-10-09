@@ -1,12 +1,11 @@
 package application.domain;
 
-public abstract class CuentaBancaria {
+public abstract class CuentaBancaria implements Imprimible{
     Persona titular;
     Double saldo;
     String IBAN;
 
     public CuentaBancaria(Persona titular, String IBAN, Double saldo) {
-        //if (!compruebaIban(IBAN)) return;
         this.titular = titular;
         this.IBAN = IBAN;
         this.saldo = saldo;

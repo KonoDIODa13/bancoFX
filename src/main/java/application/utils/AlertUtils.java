@@ -1,7 +1,7 @@
 package application.utils;
 
 import javafx.scene.control.Alert;
-
+// clase de utiles, en este caso, para mostrar los alert de errores y de confirmaciones.
 public class AlertUtils {
 
     public static void mostrarError(String mensaje) {

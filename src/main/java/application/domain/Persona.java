@@ -1,6 +1,7 @@
 package application.domain;
 
-public class Persona {
+// implemento imprimible
+public class Persona implements Imprimible {
     String nombre;
     String apellidos;
     String DNI;
@@ -12,11 +13,7 @@ public class Persona {
     }
 
     @Override
-    public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", DNI='" + DNI + '\'' +
-                '}';
+    public String imprimir() {
+        return "nombre=" + nombre + ", apellidos=" + apellidos + ", DNI=" + DNI;
     }
 }
